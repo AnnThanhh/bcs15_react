@@ -1,6 +1,14 @@
 const CardProducts = (props) => {
   //props = {tenSanPham: ""}
   //props đại diện cho các giá trị nhận vào từ propName của component <Component propsName =""/>
+  /**
+   * Điểm khác biệt giữa state và props
+   * state và props đều chưa các giá trị binding lên giao diện
+   * 
+   * state chứa các giá trị có thể thay đổi (thông qua phương thức setState)
+   * props thì chứa các giá trị nhận từ component cha truyền vào và truyền vào 
+   */
+
   const { tenSanPham, gia } = props;
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
