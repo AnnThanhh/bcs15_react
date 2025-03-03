@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SanPham from "./SanPham";
 import SanPhamChiTiet from "./SanPhamChiTiet";
+import GioHang from "./GioHang";
 
 const data = [
   {
@@ -54,9 +55,29 @@ const DanhSachSAnPham = () => {
     giaBan: 7600000,
     hinhAnh: "./public/img/phone/meizuphone.jpg",
   });
+
+  const [gioHang, setGioHang] = useState([
+    {
+      maSP: 2,
+      tenSP: "Meizu 16Xs",
+      manHinh: "AMOLED, FHD+ 2232 x 1080 pixels",
+      giaBan: 7600000,
+      hinhAnh: "./public/img/phone/meizuphone.jpg",
+      soLuong: 2,
+    },
+    {
+      maSP: 3,
+      tenSP: "Meizu 16Xs",
+      manHinh: "AMOLED, FHD+ 2232 x 1080 pixels",
+      giaBan: 7600000,
+      hinhAnh: "./public/img/phone/meizuphone.jpg",
+      soLuong: 2,
+    },
+  ]);
   return (
     <div className="container mx-auto">
       <h3>Danh sách sản phẩm </h3>
+      <GioHang gioHang={gioHang} />
       <div className="grid grid-cols-3">
         {data.map((sp, index) => {
           return (
@@ -66,6 +87,8 @@ const DanhSachSAnPham = () => {
               setSpChitiet={() => {
                 setSpChitiet(sp);
               }}
+              gioHang={gioHang}
+              setGioHang={setGioHang}
             />
           );
         })}

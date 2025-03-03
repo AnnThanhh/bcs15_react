@@ -9,30 +9,32 @@ const SanPhamChiTiet = (props) => {
       <div>
         <h3>thông số kỹ thuật</h3>
         <table>
-          <tr>
-            <td>màn hình</td>
-            <td>{spChiTiet.manHinh}</td>
-          </tr>
-          <tr>
-            <td>hệ điều hành</td>
-            <td>{spChiTiet.heDieuHanh}</td>
-          </tr>
-          <tr>
-            <td>Camera trước</td>
-            <td>{spChiTiet.cameraTruoc}</td>
-          </tr>
-          <tr>
-            <td>Camera sau</td>
-            <td>{spChiTiet.cameraSau}</td>
-          </tr>
-          <tr>
-            <td>RAM</td>
-            <td>{spChiTiet.manHinh}</td>
-          </tr>
-          <tr>
-            <td>ROM</td>
-            <td>{spChiTiet.rom}</td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>màn hình</td>
+              <td>{spChiTiet.manHinh}</td>
+            </tr>
+            <tr>
+              <td>hệ điều hành</td>
+              <td>{spChiTiet.heDieuHanh}</td>
+            </tr>
+            <tr>
+              <td>Camera trước</td>
+              <td>{spChiTiet.cameraTruoc}</td>
+            </tr>
+            <tr>
+              <td>Camera sau</td>
+              <td>{spChiTiet.cameraSau}</td>
+            </tr>
+            <tr>
+              <td>RAM</td>
+              <td>{spChiTiet.manHinh}</td>
+            </tr>
+            <tr>
+              <td>ROM</td>
+              <td>{spChiTiet.rom}</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>

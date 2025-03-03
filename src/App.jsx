@@ -9,9 +9,9 @@
 // import DemoChangeCar from "./state/DemoChangeCar";
 // import DemoTinkerApp from "./state/DemoTinkerApp";
 
-import CarStore from "./LiftingStateUp/CarStore/CarStore";
+// import CarStore from "./LiftingStateUp/CarStore/CarStore";
 
-// import DanhSachSAnPham from "./LiftingStateUp/DanhSachSAnPham";
+import DanhSachSAnPham from "./LiftingStateUp/DanhSachSAnPham";
 
 const App = () => {
   return (
@@ -26,8 +26,8 @@ const App = () => {
       {/* <DemoChangeCar /> */}
       {/* <DemoProps /> */}
       {/* <RenderWithMap /> */}
-      {/* <DanhSachSAnPham /> */}
-      <CarStore />
+      <DanhSachSAnPham />
+      {/* <CarStore /> */}
     </div>
   );
 };
