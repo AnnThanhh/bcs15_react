@@ -1,7 +1,20 @@
 const GioHang = (props) => {
   const { gioHang } = props;
+
+  const tinhTongTien = () => {
+    const tongTien = gioHang.reduce((total, item, index) => {
+      total += item.soLuong * item.giaBan;
+      return total;
+    }, 0);
+    return tongTien.toLocaleString();
+  };
+
   return (
     <div className="relative overflow-x-auto my-4">
+      <h3>
+        Tổng tiền giỏ hàng: số loại sản phẩm: {gioHang.length} - tổng tiền: $
+        {tinhTongTien()}
+      </h3>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -23,6 +36,9 @@ const GioHang = (props) => {
             <th scope="col" className="px-6 py-3">
               Thành tiền
             </th>
+            <th scope="col" className="px-6 py-3">
+              Hành động
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -43,8 +59,47 @@ const GioHang = (props) => {
                 </td>
                 <td className="px-6 py-4"> {item.tenSP}</td>
                 <td className="px-6 py-4">$ {item.giaBan}</td>
-                <td className="px-6 py-4">{item.soLuong}</td>
-                <td className="px-6 py-4">${item.soLuong * item.giaBan}</td>
+                <td className="px-6 py-4">
+                  <button
+                    type="button"
+                    className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-2 py-1.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                    onClick={() => {
+                      props.tangGiamSoLuong(item.maSP, 1);
+                    }}
+                  >
+                    +
+                  </button>
+                  <input
+                    value={item.soLuong}
+                    style={{ width: 20 }}
+                    onChange={(e) => {
+                      props.thayDoiSoLuong(item.maSP, e.target.value);
+                    }}
+                  />
+                  <button
+                    type="button"
+                    className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-2 py-1.5 me-2 mb-2 ml-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                    onClick={() => {
+                      props.tangGiamSoLuong(item.maSP, -1);
+                    }}
+                  >
+                    -
+                  </button>
+                </td>
+                <td className="px-6 py-4">
+                  ${(item.soLuong * item.giaBan).toLocaleString()}
+                </td>
+                <td className="px-6 py-4">
+                  <button
+                    type="button"
+                    className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                    onClick={() => {
+                      props.xoaGioHang(item.maSP);
+                    }}
+                  >
+                    Xóa
+                  </button>
+                </td>
               </tr>
             );
           })}
