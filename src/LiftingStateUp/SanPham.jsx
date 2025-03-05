@@ -1,5 +1,5 @@
 const SanPham = (props) => {
-  const { spItem, setSpChitiet, gioHang, setGioHang } = props;
+  const { spItem, setSpChitiet, themGioHang } = props;
   return (
     <div>
       <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
@@ -39,9 +39,8 @@ const SanPham = (props) => {
           <a
             href="#"
             className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-black bg-white rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 mx-4"
-            onClick = {()=>{
-             const gioHangMoi = [...gioHang, spItem]
-             setGioHang(gioHangMoi)
+            onClick={() => {
+              themGioHang(spItem);
             }}
           >
             Thêm giỏ hàng

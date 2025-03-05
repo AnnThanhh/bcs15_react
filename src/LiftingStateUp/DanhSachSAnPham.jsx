@@ -56,24 +56,16 @@ const DanhSachSAnPham = () => {
     hinhAnh: "./public/img/phone/meizuphone.jpg",
   });
 
-  const [gioHang, setGioHang] = useState([
-    {
-      maSP: 2,
-      tenSP: "Meizu 16Xs",
-      manHinh: "AMOLED, FHD+ 2232 x 1080 pixels",
-      giaBan: 7600000,
-      hinhAnh: "./public/img/phone/meizuphone.jpg",
-      soLuong: 2,
-    },
-    {
-      maSP: 3,
-      tenSP: "Meizu 16Xs",
-      manHinh: "AMOLED, FHD+ 2232 x 1080 pixels",
-      giaBan: 7600000,
-      hinhAnh: "./public/img/phone/meizuphone.jpg",
-      soLuong: 2,
-    },
-  ]);
+  const [gioHang, setGioHang] = useState([]);
+
+  //state đặt ở đâu thì hàm xử lý setState sẽ nằm ở trên component đó
+  const themGioHang = (spClick) => {
+    //tạo ra sản phẩm có số lượng
+    const spGioHang = { ...spClick, soLuong: 1 };
+    // xử lý setState lại hàm này 
+    const gioHangMoi = [...gioHang, spGioHang];
+    setGioHang(gioHangMoi);
+  };
   return (
     <div className="container mx-auto">
       <h3>Danh sách sản phẩm </h3>
@@ -87,8 +79,7 @@ const DanhSachSAnPham = () => {
               setSpChitiet={() => {
                 setSpChitiet(sp);
               }}
-              gioHang={gioHang}
-              setGioHang={setGioHang}
+              themGioHang={themGioHang}
             />
           );
         })}
