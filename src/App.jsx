@@ -9,9 +9,12 @@
 // import DemoChangeCar from "./state/DemoChangeCar";
 // import DemoTinkerApp from "./state/DemoTinkerApp";
 
+import DemoLoginForm from "./FormDemo/DemoLoginForm";
+
 // import CarStore from "./LiftingStateUp/CarStore/CarStore";
 
-import DanhSachSAnPham from "./LiftingStateUp/DanhSachSAnPham";
+// import Shoepages from "./apiDemo/Shoepages";
+// import DanhSachSAnPham from "./LiftingStateUp/DanhSachSAnPham";
 
 const App = () => {
   return (
@@ -26,8 +29,10 @@ const App = () => {
       {/* <DemoChangeCar /> */}
       {/* <DemoProps /> */}
       {/* <RenderWithMap /> */}
-      <DanhSachSAnPham />
+      {/* <DanhSachSAnPham /> */}
       {/* <CarStore /> */}
+      {/* <Shoepages /> */}
+      <DemoLoginForm />
     </div>
   );
 };
