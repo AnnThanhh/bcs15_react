@@ -1,36 +1,59 @@
+import { useState } from "react";
 
 const DemoLoginForm = () => {
-  
+  const [userLogin, setUserLogin] = useState({
+    email: "",
+    password: "",
+  });
+  console.log(userLogin);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("submit");
+  };
+
+  const handleChangeInput = (e) => {
+    const { name, value } = e.target;
+    setUserLogin({
+      ...userLogin,
+      [name]: value,
+    });
+  };
+
   return (
     <div className="container mx-auto">
-      <form className="max-w-sm mx-auto">
+      <form className="max-w-sm mx-auto" onSubmit={handleSubmit}>
         <div className="mb-5">
           <label
             htmlFor="email"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-gray-900 "
           >
             Your email
           </label>
           <input
-            type="email"
+            // type="email"
             id="email"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="name@flowbite.com"
-            required
+            // required
+            name="email"
+            onChange={handleChangeInput}
           />
         </div>
         <div className="mb-5">
           <label
             htmlFor="password"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
             Your password
           </label>
           <input
-            type="password"
+            // type="password"
             id="password"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            required
+            // required
+            name="password"
+            onChange={handleChangeInput}
           />
         </div>
         <div className="flex items-start mb-5">
@@ -40,7 +63,7 @@ const DemoLoginForm = () => {
               type="checkbox"
               defaultValue
               className="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-              required
+              // required
             />
           </div>
           <label
