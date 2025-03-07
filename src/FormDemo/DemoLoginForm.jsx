@@ -7,13 +7,68 @@ const DemoLoginForm = () => {
   });
   console.log(userLogin);
 
+  const [error, setError] = useState({
+    email: "",
+    password: "",
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    //chặn submit khi form không hợp lệ
+    //hợp lệ khi các error = rỗng và form đã nhập liệu
+    for (let key in error) {
+      if (error[key] !== "") {
+        //chỉ cần 1 lỗi xảy ra (object error có ít nhất 1 trường có giá trị)
+        return; // dhừng hàm submit
+      }
+    }
+
+    // for(let key in userLogin){
+    //   if(userLogin[key] === "" && key !== "phone"){
+    //     return}
+    // }
+
+    
     console.log("submit");
   };
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
+
+    let messError = "";
+    let attrType = e.target.getAttribute("data-type");
+    if (value === "") {
+      //kiểm tra rỗng, nếu rỗng thì báo lỗi
+      messError = `${name} is required`;
+    } else {
+      //xét lỗi nếu như đã nhập liệu thì kiểm qua regex
+      switch (attrType) {
+        case "email":
+          {
+            const regextEmail =
+              /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!regextEmail.test(value)) {
+              messError = `${name} is invalid`;
+            }
+          }
+          break;
+        case "password":
+          {
+            const regextPassword =
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!regextPassword.test(value)) {
+              messError = `${name} is invalid`;
+            }
+          }
+          break;
+      }
+    }
+
+    setError({
+      ...error,
+      [name]: messError,
+    });
+
     setUserLogin({
       ...userLogin,
       [name]: value,
@@ -37,8 +92,10 @@ const DemoLoginForm = () => {
             placeholder="name@flowbite.com"
             // required
             name="email"
+            data-type="email"
             onChange={handleChangeInput}
           />
+          {error.email && <p className="text-red-500">{error.email}</p>}
         </div>
         <div className="mb-5">
           <label
@@ -53,8 +110,10 @@ const DemoLoginForm = () => {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             // required
             name="password"
+            data-type="password"
             onChange={handleChangeInput}
           />
+          {error.password && <p className="text-red-500">{error.password}</p>}
         </div>
         <div className="flex items-start mb-5">
           <div className="flex items-center h-5">
