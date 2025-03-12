@@ -30,6 +30,10 @@ import ForgotPass from "./pages/ForgotPass";
 // import Shoepages from "./apiDemo/Shoepages";
 import DanhSachSAnPham from "./LiftingStateUp/DanhSachSAnPham";
 import Detail from "./pages/Detail";
+import Search from "./pages/Search";
+import ProductManagement from "./pages/ProductManagement/ProductManagement";
+import AddProduct from "./pages/ProductManagement/AddProduct";
+import EditProdct from "./pages/ProductManagement/EditProdct";
 
 const App = () => {
   return (
@@ -60,6 +64,7 @@ const App = () => {
           <Route index element={<HomePage />}></Route>
           <Route path="login" element={<Login />}></Route>
           <Route path="about" element={<About />}></Route>
+          <Route path="search" element={<Search />}></Route>
           <Route path="detail">
             <Route path=":prodID" element={<Detail />}></Route>
           </Route>
@@ -77,6 +82,11 @@ const App = () => {
         <Route path="admin" element={<AdminPageMaster />}>
           <Route path="login" element={<Login />}></Route>
           <Route path="about" element={<About />}></Route>
+          <Route path="product" element={<ProductManagement />}></Route>
+          <Route path="add-product" element={<AddProduct />}></Route>
+          <Route path="edit">
+            <Route path=":id" element={<EditProdct />}></Route>
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
