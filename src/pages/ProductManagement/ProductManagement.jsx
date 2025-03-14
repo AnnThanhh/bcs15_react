@@ -1,13 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { NavLink, useSearchParams } from "react-router-dom";
 
 //xây dựng giao diện table chứa danh sách sản phẩm và thanh tìm kiếm
 const ProductManagement = () => {
   const [arrProduct, setArrayProduct] = useState([]);
+
+  //useSearchParams()
+  const [search, setSearch] = useSearchParams();
+
+  const kw = search.get("prodName"); // 1 , abc, san pham
+  const handleChange = (e) => {
+    //đưa dữ liệu từ phía người dùng lên url
+    setSearch({
+      prodName: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   const getAllProductAPI = async () => {
-    const res = await fetch(
-      "https://apitraining.cybersoft.edu.vn/api/ProductApi/getall"
-    );
+    let url = "";
+    if (kw) {
+      url = `https://apitraining.cybersoft.edu.vn/api/ProductApi/getall?keyword=${kw}`;
+    } else {
+      url = `https://apitraining.cybersoft.edu.vn/api/ProductApi/getall`;
+    }
+    const res = await fetch(url);
 
     const data = await res.json();
     console.log(data);
@@ -16,13 +37,14 @@ const ProductManagement = () => {
 
   useEffect(() => {
     getAllProductAPI();
-  }, []);
+    //rỗng: là gọi api sau khi load xong html 1 lần
+  }, [kw]);
   return (
     <div>
       <div className="container mx-auto mt-4">
         {/* Thanh tìm kiếm */}
         <div className="mb-4">
-          <div className="relative">
+          <form className="relative" onSubmit={handleSubmit}>
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <svg
                 className="w-4 h-4 text-gray-500"
@@ -43,10 +65,11 @@ const ProductManagement = () => {
               id="product-search"
               className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Tìm kiếm sản phẩm..."
+              onInput={handleChange}
             />
-          </div>
+          </form>
           <NavLink
-            to="../add-product"
+            to="../product"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
             New Product
@@ -109,15 +132,32 @@ const ProductManagement = () => {
                     <td className="px-6 py-4">{item.name}</td>
                     <td className="px-6 py-4">{item.price}</td>
                     <td className="px-6 py-4">{item.type}</td>
+
                     <td className="px-6 py-4">
-                      <NavLink className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                      <NavLink
+                        to={`../edit/${item.id}`}
+                        className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                      >
                         Edit
                       </NavLink>
-                      <NavLink className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                      <button
+                        className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                        onClick={async () => {
+                          if (window.confirm("bạn có muốn xóa không")) {
+                            const res = await axios.delete(
+                              `https://apitraining.cybersoft.edu.vn/api/ProductApi/delete/${item.id}`
+                            );
+                            getAllProductAPI();
+                          }
+                        }}
+                      >
                         Delete
-                      </NavLink>
-                      <NavLink className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                        View detail
+                      </button>
+                      <NavLink
+                        to={`../product/${item.id}`}
+                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                      >
+                        Edit 2
                       </NavLink>
                     </td>
                   </tr>

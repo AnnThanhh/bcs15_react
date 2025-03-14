@@ -34,6 +34,7 @@ import Search from "./pages/Search";
 import ProductManagement from "./pages/ProductManagement/ProductManagement";
 import AddProduct from "./pages/ProductManagement/AddProduct";
 import EditProdct from "./pages/ProductManagement/EditProdct";
+import Product from "./pages/ProductManagement/Product";
 
 const App = () => {
   return (
@@ -82,11 +83,23 @@ const App = () => {
         <Route path="admin" element={<AdminPageMaster />}>
           <Route path="login" element={<Login />}></Route>
           <Route path="about" element={<About />}></Route>
-          <Route path="product" element={<ProductManagement />}></Route>
+          <Route
+            path="product-management"
+            element={<ProductManagement />}
+          ></Route>
           <Route path="add-product" element={<AddProduct />}></Route>
           <Route path="edit">
             <Route path=":id" element={<EditProdct />}></Route>
           </Route>
+
+
+          <Route path="product" element={<Product />}></Route>
+          <Route path="product">
+            <Route path=":id" element={<Product />}></Route>
+          </Route>
+
+
+          
         </Route>
       </Routes>
     </BrowserRouter>

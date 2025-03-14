@@ -1,11 +1,15 @@
-import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useFormik } from "formik";
-const EditProdct = () => {
+import React, { useEffect } from "react";
+import { useMatch, useNavigate, useParams } from "react-router-dom";
+
+const Product = () => {
+  const match = useMatch("/admin/product/:id");
+  console.log(match); // nếu là null thì add product. ngược lại có giá trị thì là edit
   const params = useParams(); // lấy tham số id trên url
   const { id } = params;
-const navigate = useNavigate()
+  const isEdit = !!match; //true: edit, false: addnew
+  const navigate = useNavigate();
   const prodForm = useFormik({
     initialValues: {
       id: "",
@@ -17,16 +21,23 @@ const navigate = useNavigate()
       deleted: false,
     },
     onSubmit: async (values) => {
-      console.log(values);
-      const res = await axios.put(
-        `https://apitraining.cybersoft.edu.vn/api/ProductApi/update/${values.id}`, values
-      );
-      //sau khi chỉnh xong thì dùng navigate chuyển về trang quản lý
-      alert("update thành công")
-      navigate("../../product-management");
+      let url = "https://apitraining.cybersoft.edu.vn/api/ProductApi/create";
+      let method = "POST";
+      if (isEdit) {
+        url = `https://apitraining.cybersoft.edu.vn/api/ProductApi/update/${match.params.id}`;
+        method = "PUT";
+      }
+      const res = await axios({
+        url,
+        method,
+        data: values,
+      });
+      console.log(res.data);
+      navigate("/admin/product-management");
     },
   });
 
+  //khi edit sẽ load dữ liệu của product
   const getAllProductAPIByID = async () => {
     const res = await axios.get(
       `https://apitraining.cybersoft.edu.vn/api/ProductApi/get/${id}`
@@ -37,11 +48,14 @@ const navigate = useNavigate()
     prodForm.setValues(res.data);
   };
   useEffect(() => {
-    getAllProductAPIByID();
-  }, []);
+    if (isEdit) {
+      getAllProductAPIByID();
+    }
+  }, [isEdit]);
+
   return (
     <div className="container mx-auto">
-      <h3>Edit Product</h3>
+      <h3>{isEdit ? "Edit product" : "Add product"}</h3>
       <form onSubmit={prodForm.handleSubmit}>
         <div>
           <div className="mb-4">
@@ -53,6 +67,7 @@ const navigate = useNavigate()
               name="id"
               value={prodForm.values.id}
               onChange={prodForm.handleChange}
+              disabled={isEdit}
             />
           </div>
           <div className="mb-4">
@@ -61,8 +76,8 @@ const navigate = useNavigate()
               type="text"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
               placeholder="Enter product name"
-              value={prodForm.values.name}
               name="name"
+              value={prodForm.values.name}
               onChange={prodForm.handleChange}
             />
           </div>
@@ -95,7 +110,6 @@ const navigate = useNavigate()
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
               placeholder="Enter description"
               name="description"
-              value={prodForm.values.description}
               onChange={prodForm.handleChange}
             />
           </div>
@@ -104,8 +118,8 @@ const navigate = useNavigate()
             <select
               name="type"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-              value={prodForm.values.type}
               onChange={prodForm.handleChange}
+              value={prodForm.values.type}
             >
               <option value={"SONY"}>SONY</option>
               <option value={"APPLE"}>APPLE</option>
@@ -127,7 +141,7 @@ const navigate = useNavigate()
             type="submit"
             className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700"
           >
-            Submit
+            {isEdit ? "Update" : "Add new"}
           </button>
         </div>
       </form>
@@ -135,4 +149,4 @@ const navigate = useNavigate()
   );
 };
 
-export default EditProdct;
+export default Product;
