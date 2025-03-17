@@ -35,6 +35,14 @@ import ProductManagement from "./pages/ProductManagement/ProductManagement";
 import AddProduct from "./pages/ProductManagement/AddProduct";
 import EditProdct from "./pages/ProductManagement/EditProdct";
 import Product from "./pages/ProductManagement/Product";
+import AntDesignDemo from "./AntDesignDemo/AntDesignDemo";
+import TableDemo from "./AntDesignDemo/TableDemo";
+import TableDemoWithApi from "./AntDesignDemo/TableDemoWithApi";
+
+//cấu hình redux
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+import ChangeNumber from "./DemoRedux/ChangeNumber";
 
 const App = () => {
   return (
@@ -55,54 +63,59 @@ const App = () => {
     //   {/* <DemoLoginForm /> */}
     //   <DemoLoginFormWithFormik />
     // </div>
-
-    <BrowserRouter>
-      <Routes>
-        {/* <Route path="/login" element={<DemoLoginFormWithFormik />}></Route>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          {/* <Route path="/login" element={<DemoLoginFormWithFormik />}></Route>
         <Route path="/demo" element={<DemoChangeCar />}></Route>
         <Route path="/demo2" element={<DemoTinkerApp />}></Route> */}
-        <Route path="" element={<HomePageMaster />}>
-          <Route index element={<HomePage />}></Route>
-          <Route path="login" element={<Login />}></Route>
-          <Route path="about" element={<About />}></Route>
-          <Route path="search" element={<Search />}></Route>
-          <Route path="detail">
-            <Route path=":prodID" element={<Detail />}></Route>
-          </Route>
-          <Route path="*" element={<PageError />}></Route>
-        </Route>
+          <Route path="" element={<HomePageMaster />}>
+            <Route index element={<HomePage />}></Route>
+            <Route path="login" element={<Login />}></Route>
+            <Route path="about" element={<About />}></Route>
+            <Route path="search" element={<Search />}></Route>
+            <Route path="detail">
+              <Route path=":prodID" element={<Detail />}></Route>
+            </Route>
 
-        <Route path="user" element={<UserPageMaster />}>
-          <Route path="login" element={<Login />}></Route>
-          <Route path="about" element={<DanhSachSAnPham />}></Route>
-          <Route path="profile" element={<Profile />}></Route>
-          <Route path="forgotpass" element={<ForgotPass />}></Route>
-          {/* <Route path="*" element={<Navigate to="/user/login" />}></Route> */}
-        </Route>
-
-        <Route path="admin" element={<AdminPageMaster />}>
-          <Route path="login" element={<Login />}></Route>
-          <Route path="about" element={<About />}></Route>
-          <Route
-            path="product-management"
-            element={<ProductManagement />}
-          ></Route>
-          <Route path="add-product" element={<AddProduct />}></Route>
-          <Route path="edit">
-            <Route path=":id" element={<EditProdct />}></Route>
+            <Route path="antd" element={<AntDesignDemo />}></Route>
+            <Route path="antd-table" element={<TableDemo />}></Route>
+            <Route path="antd-table-api" element={<TableDemoWithApi />}></Route>
+            <Route path="*" element={<PageError />}></Route>
+            <Route
+              path="redux-change-number"
+              element={<ChangeNumber />}
+            ></Route>
           </Route>
 
-
-          <Route path="product" element={<Product />}></Route>
-          <Route path="product">
-            <Route path=":id" element={<Product />}></Route>
+          <Route path="user" element={<UserPageMaster />}>
+            <Route path="login" element={<Login />}></Route>
+            <Route path="about" element={<DanhSachSAnPham />}></Route>
+            <Route path="profile" element={<Profile />}></Route>
+            <Route path="forgotpass" element={<ForgotPass />}></Route>
+            {/* <Route path="*" element={<Navigate to="/user/login" />}></Route> */}
           </Route>
 
+          <Route path="admin" element={<AdminPageMaster />}>
+            <Route path="login" element={<Login />}></Route>
+            <Route path="about" element={<About />}></Route>
+            <Route
+              path="product-management"
+              element={<ProductManagement />}
+            ></Route>
+            <Route path="add-product" element={<AddProduct />}></Route>
+            <Route path="edit">
+              <Route path=":id" element={<EditProdct />}></Route>
+            </Route>
 
-          
-        </Route>
-      </Routes>
-    </BrowserRouter>
+            <Route path="product" element={<Product />}></Route>
+            <Route path="product">
+              <Route path=":id" element={<Product />}></Route>
+            </Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
 };
 
