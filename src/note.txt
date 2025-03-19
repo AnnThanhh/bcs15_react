@@ -1,0 +1,22 @@
+Các bước khi làm việc với redux
+1. set up giao diện 
+    chia component, page, content (UI)
+
+2. xác định state 
+    object
+    array
+    primitve(boolen, number, string)
+    => đặt tại store 
+            => tạo reducer (rxslide)
+                gắn vào file store.js (tại thuộc tính reducer)
+                kiểm tra qua giao diện của redux dev tool
+
+
+3.binding state 
+    đến component cần lấy state để hiển thị => useSelector 
+
+4. Xử lý thay đổi state 
+    tại reducer định nghĩa action (export action)
+    tại component sử dụng hàm action được định nghãi để tạo ra các actionPayload tương ứng
+        -> dispatch action(type,payload) thì dữ liệu sẽ đến file reducer tương ứng
+        -> xử lý việc thay đổi state trong hàm action 

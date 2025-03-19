@@ -43,6 +43,9 @@ import TableDemoWithApi from "./AntDesignDemo/TableDemoWithApi";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import ChangeNumber from "./DemoRedux/ChangeNumber";
+import ChangeFontSizeWithRedux from "./DemoRedux/ChangeFontSizeWithRedux";
+import ShoeShop from "./DemoRedux/shoeShop";
+import Cart from "./DemoRedux/Cart";
 
 const App = () => {
   return (
@@ -86,6 +89,12 @@ const App = () => {
               path="redux-change-number"
               element={<ChangeNumber />}
             ></Route>
+            <Route
+              path="redux-change-fontsize"
+              element={<ChangeFontSizeWithRedux />}
+            ></Route>
+            <Route path="redux-shoe-shop" element={<ShoeShop />}></Route>
+            <Route path="cart" element={<Cart />}></Route>
           </Route>
 
           <Route path="user" element={<UserPageMaster />}>
