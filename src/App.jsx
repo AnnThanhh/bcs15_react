@@ -46,6 +46,9 @@ import ChangeNumber from "./DemoRedux/ChangeNumber";
 import ChangeFontSizeWithRedux from "./DemoRedux/ChangeFontSizeWithRedux";
 import ShoeShop from "./DemoRedux/shoeShop";
 import Cart from "./DemoRedux/Cart";
+import Register from "./DemoRedux/Register";
+import Login2 from "./DemoRedux/Login";
+import Profile2 from "./DemoRedux/Profile2";
 
 const App = () => {
   return (
@@ -74,7 +77,7 @@ const App = () => {
         <Route path="/demo2" element={<DemoTinkerApp />}></Route> */}
           <Route path="" element={<HomePageMaster />}>
             <Route index element={<HomePage />}></Route>
-            <Route path="login" element={<Login />}></Route>
+            {/* <Route path="login" element={<Login />}></Route> */}
             <Route path="about" element={<About />}></Route>
             <Route path="search" element={<Search />}></Route>
             <Route path="detail">
@@ -95,6 +98,10 @@ const App = () => {
             ></Route>
             <Route path="redux-shoe-shop" element={<ShoeShop />}></Route>
             <Route path="cart" element={<Cart />}></Route>
+
+            <Route path="register" element={<Register />}></Route>
+            <Route path="loginWithFormik" element={<Login2 />}></Route>
+            <Route path="/profile" element={<Profile2 />}></Route>
           </Route>
 
           <Route path="user" element={<UserPageMaster />}>

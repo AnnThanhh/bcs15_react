@@ -2,12 +2,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { numberReducer } from "./reducers/numberReducer";
 import { fontSizeReducer } from "./reducers/fSizeReducer";
-import cartReducer  from "./reducers/cartReducer";
+import cartReducer from "./reducers/cartReducer";
+import userReducer from "./reducers/userReducer";
 export const store = configureStore({
   reducer: {
     numberReducer: numberReducer,
     fontSizeReducer: fontSizeReducer,
     cartReducer: cartReducer,
+    userReducer: userReducer,
   },
 });
 
