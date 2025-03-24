@@ -4,12 +4,14 @@ import { numberReducer } from "./reducers/numberReducer";
 import { fontSizeReducer } from "./reducers/fSizeReducer";
 import cartReducer from "./reducers/cartReducer";
 import userReducer from "./reducers/userReducer";
+import productReducer from "./reducers/productReducer";
 export const store = configureStore({
   reducer: {
     numberReducer: numberReducer,
     fontSizeReducer: fontSizeReducer,
     cartReducer: cartReducer,
     userReducer: userReducer,
+    productReducer: productReducer,
   },
 });
 

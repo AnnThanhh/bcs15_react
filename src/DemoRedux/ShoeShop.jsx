@@ -1,19 +1,29 @@
 import { Button, Card } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProductAction } from "../redux/reducers/cartReducer";
-
+import { useNavigate } from "react-router-dom";
+import { getProductApiActionThunk } from "../redux/reducers/productReducer";
 const ShoeShop = () => {
-  const [arrProduct, setArrProduct] = useState([]);
   const dispatch = useDispatch();
-  const getAllProductAPI = async () => {
-    const res = await axios.get(
-      "https://apistore.cybersoft.edu.vn/api/Product"
-    );
+  const { arrProduct } = useSelector((state) => state.productReducer);
 
-    setArrProduct(res.data.content);
-    console.log(res.data.content);
+  const getAllProductAPI = async () => {
+    // const res = await axios.get(
+    //   "https://apistore.cybersoft.edu.vn/api/Product"
+    // );
+    // setArrProduct(res.data.content);
+    // console.log(res.data.content);
+    // dispatch(getProductApiActionThunk)
+
+    /**
+     * actionPayload: {type, payload}
+     * actionThunk: (dispatch)=> {//những định nghĩa logic để có dữ loeụe dispatch lên store }
+     */
+
+    const actionThunk = getProductApiActionThunk();
+    dispatch(actionThunk);
   };
 
   useEffect(() => {
@@ -43,12 +53,12 @@ const ShoeShop = () => {
                   //     payload: { ...item, quantity: 1 },
                   //   };
 
-                //   const action = {
-                //     type: "cartReducer/addProductAction",
-                //     payload: { ...item, quantity: 1 },
-                //   };
+                  //   const action = {
+                  //     type: "cartReducer/addProductAction",
+                  //     payload: { ...item, quantity: 1 },
+                  //   };
 
-                const action = addProductAction({...item,quantity: 1})
+                  const action = addProductAction({ ...item, quantity: 1 });
 
                   dispatch(action);
                 }}

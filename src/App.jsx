@@ -49,7 +49,8 @@ import Cart from "./DemoRedux/Cart";
 import Register from "./DemoRedux/Register";
 import Login2 from "./DemoRedux/Login";
 import Profile2 from "./DemoRedux/Profile2";
-
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
+import { navigateHistory } from "./utils/setting";
 const App = () => {
   return (
     // <div>
@@ -69,8 +70,8 @@ const App = () => {
     //   {/* <DemoLoginForm /> */}
     //   <DemoLoginFormWithFormik />
     // </div>
-    <Provider store={store}>
-      <BrowserRouter>
+    <HistoryRouter history={navigateHistory}>
+      <Provider store={store}>
         <Routes>
           {/* <Route path="/login" element={<DemoLoginFormWithFormik />}></Route>
         <Route path="/demo" element={<DemoChangeCar />}></Route>
@@ -130,8 +131,8 @@ const App = () => {
             </Route>
           </Route>
         </Routes>
-      </BrowserRouter>
-    </Provider>
+      </Provider>
+    </HistoryRouter>
   );
 };
 

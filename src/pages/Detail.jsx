@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useParams } from "react-router-dom";
+import { getProductDetailActionThunk } from "../redux/reducers/productReducer";
 
 const Detail = () => {
   const param = useParams();
 
-  const [prodDetails, setProdDetail] = useState({});
+  // const [prodDetails, setProdDetail] = useState({});
+  const { prodDetails } = useSelector((state) => state.productReducer);
 
+  const dispatch = useDispatch();
   const [transformValue, setTranformValue] = useState("rotate(0deg)");
   console.log(param);
 
   const getProductByID = async () => {
-    const response = await fetch(
-      `https://apistore.cybersoft.edu.vn/api/Product/getbyid?id=${param.prodID}`
-    );
-    const jsonRes = await response.json();
-    const data = jsonRes.content;
-    console.log(data);
-    setProdDetail(data);
+    // const response = await fetch(
+    //   `https://apistore.cybersoft.edu.vn/api/Product/getbyid?id=${param.prodID}`
+    // );
+    // const jsonRes = await response.json();
+    // const data = jsonRes.content;
+    // console.log(data);
+    // setProdDetail(data);
+
+    //tạo ra action thunk là 1 hàm có tham số là dispatch
+    dispatch(getProductDetailActionThunk(param.prodID));
   };
 
   useEffect(() => {
@@ -48,7 +55,9 @@ const Detail = () => {
                   src={prodDetails.image}
                   style={{
                     transform: deg,
-                    border: `1px solid ${deg === transformValue ? 'orange' : '#EEE'}`,
+                    border: `1px solid ${
+                      deg === transformValue ? "orange" : "#EEE"
+                    }`,
                     cursor: "pointer",
                   }}
                   className="w-15 m-2"
