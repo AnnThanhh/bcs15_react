@@ -77,6 +77,7 @@ http.interceptors.response.use(
           localStorage.setItem(TOKEN, response.data.content.accessToken);
           navigateHistory.push(window.location.pathname);
         } catch (err) {
+          alert(err);
           //nếu refresh thất bại thì yêu cầu login lại
           navigateHistory.push("/loginWithFormik");
         }
@@ -122,7 +123,7 @@ http.interceptors.response.use(
         }
         break;
     }
-    return Promise.reject(err)
+    return Promise.reject(err);
   }
 );
 /**

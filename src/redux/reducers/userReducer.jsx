@@ -9,6 +9,7 @@ const initialState = {
     gender: true,
     phone: "",
   },
+  userLogin: null,
 };
 
 const userReducer = createSlice({

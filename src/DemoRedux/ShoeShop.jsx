@@ -1,9 +1,9 @@
 import { Button, Card } from "antd";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+// import axios from "axios";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductAction } from "../redux/reducers/cartReducer";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { getProductApiActionThunk } from "../redux/reducers/productReducer";
 const ShoeShop = () => {
   const dispatch = useDispatch();

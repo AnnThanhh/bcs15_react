@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getProductDetailActionThunk } from "../redux/reducers/productReducer";
 
 const Detail = () => {

@@ -6,15 +6,15 @@
 // import DemoChangeFontSize from "./state/DemoChangeFontSize";
 // import DemoProps from "./props/DemoProps";
 // import RenderWithMap from "./renderWithMap/RenderWithMap";
-import DemoChangeCar from "./state/DemoChangeCar";
-import DemoTinkerApp from "./state/DemoTinkerApp";
+// import DemoChangeCar from "./state/DemoChangeCar";
+// import DemoTinkerApp from "./state/DemoTinkerApp";
 
 // import DemoLoginForm from "./FormDemo/DemoLoginForm";
 // import DemoLoginFormWithFormik from "./FormDemo/DemoLoginFormWithFormik";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, } from "react-router-dom";
 
-import DemoLoginFormWithFormik from "./FormDemo/DemoLoginFormWithFormik";
-import HeaderHome from "./component/Router/HeaderHome";
+// import DemoLoginFormWithFormik from "./FormDemo/DemoLoginFormWithFormik";
+// import HeaderHome from "./component/Router/HeaderHome";
 import HomePageMaster from "./MasterPages/HomePageMaster";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
@@ -22,7 +22,7 @@ import About from "./pages/About";
 import UserPageMaster from "./MasterPages/UserPageMaster";
 import AdminPageMaster from "./MasterPages/AdminPageMaster";
 import PageError from "./pages/PageError";
-import PracticeForm from "./FormDemo/PracticeForm";
+// import PracticeForm from "./FormDemo/PracticeForm";
 import Profile from "./pages/Profile";
 import ForgotPass from "./pages/ForgotPass";
 // import CarStore from "./LiftingStateUp/CarStore/CarStore";
