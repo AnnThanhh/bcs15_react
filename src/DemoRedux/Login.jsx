@@ -1,32 +1,36 @@
 import { useFormik } from "formik";
-import React from "react";
-import axios from "axios";
-import { setCookie, TOKEN, USER_LOGIN } from "../utils/setting";
+import { useDispatch } from "react-redux";
+import { loginAction } from "../redux/reducers/userReducer";
 import { useNavigate } from "react-router-dom";
 const Login2 = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const frmLogin = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     onSubmit: async (values) => {
-      console.log(values);
-      const res = await axios.post(
-        "https://apistore.cybersoft.edu.vn/api/Users/signin",
-        values
-      );
-      console.log(res.data.content);
-      //lưu token vào client (localstorage, cookie)
+      // console.log(values);
+      // const res = await axios.post(
+      //   "https://apistore.cybersoft.edu.vn/api/Users/signin",
+      //   values
+      // );
+      // console.log(res.data.content);
+      // //lưu token vào client (localstorage, cookie)
 
-      const token = res.data.content.accessToken;
-      localStorage.setItem(TOKEN, token);
+      // const token = res.data.content.accessToken;
+      // localStorage.setItem(TOKEN, token);
 
-      const userLogin = JSON.stringify(res.data.content);
-      localStorage.setItem(USER_LOGIN, userLogin);
+      // const userLogin = JSON.stringify(res.data.content);
+      // localStorage.setItem(USER_LOGIN, userLogin);
 
-      //lưu vào cookie
-      setCookie(TOKEN, token, 7);
+      // //lưu vào cookie
+      // setCookie(TOKEN, token, 7);
+      // navigate("/profile");
+
+      //cách 2 : sử dụng redux thunk
+      dispatch(loginAction(values));
       navigate("/profile");
     },
   });

@@ -2,28 +2,34 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { http, TOKEN } from "../utils/setting";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getProfileAction } from "../redux/reducers/userReducer";
 const Profile2 = () => {
-  const [profile, setProfile] = useState({});
+  // const [profile, setProfile] = useState({});
+  //lấy userProfile từ trên redux về
+  const { profile } = useSelector((state) => state.userReducer);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const getProfileAPI = async () => {
-    try {
-      // const res = await axios({
-      //   url: "https://apistore.cybersoft.edu.vn/api/Users/getProfile",
-      //   method: "POST",
-      //   headers: {
-      //     Authorization: localStorage.getItem(TOKEN),
-      //   },
-      // });
-      const res = await http.post("/api/Users/getProfile");
-      console.log(res.data.content);
-      setProfile(res.data.content);
-    } catch (err) {
-      console.log(err);
-      //thất bại thì sẽ chuyển bại
-      alert("Đăng nhập để vào profile");
-      navigate("/loginWithFormik");
-    }
+    // try {
+    //   // const res = await axios({
+    //   //   url: "https://apistore.cybersoft.edu.vn/api/Users/getProfile",
+    //   //   method: "POST",
+    //   //   headers: {
+    //   //     Authorization: localStorage.getItem(TOKEN),
+    //   //   },
+    //   // });
+    //   const res = await http.post("/api/Users/getProfile");
+    //   console.log(res.data.content);
+    //   setProfile(res.data.content);
+    // } catch (err) {
+    //   console.log(err);
+    //   //thất bại thì sẽ chuyển bại
+    //   alert("Đăng nhập để vào profile");
+    //   navigate("/loginWithFormik");
+    // }
+    //redux action thunk (gọi api)
+    dispatch(getProfileAction);
   };
   useEffect(() => {
     getProfileAPI();
@@ -49,7 +55,9 @@ const Profile2 = () => {
           {/* Gender */}
           <div className="flex justify-between">
             <span className="text-gray-700 font-bold">Gender:</span>
-            <span className="text-gray-600">{profile.gender ? "Nam" : "Nữ"}</span>
+            <span className="text-gray-600">
+              {profile.gender ? "Nam" : "Nữ"}
+            </span>
           </div>
           {/* Phone */}
           <div className="flex justify-between">

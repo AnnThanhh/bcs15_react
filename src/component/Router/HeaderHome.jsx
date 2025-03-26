@@ -1,24 +1,42 @@
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { deleteCookie, TOKEN, USER_LOGIN } from "../../utils/setting";
 
 const HeaderHome = () => {
   const cartStore = useSelector((state) => state.cartReducer.cart);
   console.log(cartStore);
-
+  const navigate = useNavigate();
   const { userLogin } = useSelector((state) => state.userReducer);
   const renderLogin = () => {
     if (userLogin) {
       return (
-        <NavLink
-          to="/loginWithFormik"
-          className={({ isActive }) => {
-            return isActive
-              ? "block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
-              : "block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent";
-          }}
-        >
-          Hello!! {userLogin.email}
-        </NavLink>
+        <>
+          <NavLink
+            to="/loginWithFormik"
+            className={({ isActive }) => {
+              return isActive
+                ? "block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                : "block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent";
+            }}
+          >
+            Hello!! {userLogin.email}
+          </NavLink>
+
+          <NavLink
+            to="/loginWithFormik"
+            className={
+              "block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+            }
+            onClick={() => {
+              deleteCookie(TOKEN);
+              localStorage.removeItem(TOKEN);
+              localStorage.removeItem(USER_LOGIN);
+              window.location.reload;
+            }}
+          >
+            Đăng xuất
+          </NavLink>
+        </>
       );
     }
     return (
@@ -80,26 +98,39 @@ const HeaderHome = () => {
             <li>{renderLogin()}</li>
             <li>
               <NavLink
-                to="/demo"
+                to="/redux-shoe-shop"
                 className={(props) => {
                   return props.isActive
                     ? "block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
                     : "block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent";
                 }}
               >
-                Demo
+                Shoe Shop
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/demo2"
+                to="/rq-shoe-shop"
                 className={({ isActive }) => {
                   return isActive
                     ? "block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
                     : "block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent";
                 }}
               >
-                Demo 2
+                RQ Shoe shop
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="/rq-user"
+                className={({ isActive }) => {
+                  return isActive
+                    ? "block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                    : "block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent";
+                }}
+              >
+               RQ User
               </NavLink>
             </li>
 

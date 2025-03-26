@@ -11,7 +11,7 @@
 
 // import DemoLoginForm from "./FormDemo/DemoLoginForm";
 // import DemoLoginFormWithFormik from "./FormDemo/DemoLoginFormWithFormik";
-import { Routes, Route, } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 // import DemoLoginFormWithFormik from "./FormDemo/DemoLoginFormWithFormik";
 // import HeaderHome from "./component/Router/HeaderHome";
@@ -51,6 +51,15 @@ import Login2 from "./DemoRedux/Login";
 import Profile2 from "./DemoRedux/Profile2";
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 import { navigateHistory } from "./utils/setting";
+
+//cấu hình react-query
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+//cấu hình react-query-dev-tool
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import ShoeShopRQ from "./ReactQueryDemo/ShoeShopRQ";
+import UserManagement from "./ReactQueryDemo/UserRQ/UserManagement";
+const queryClient = new QueryClient();
+
 const App = () => {
   return (
     // <div>
@@ -72,65 +81,73 @@ const App = () => {
     // </div>
     <HistoryRouter history={navigateHistory}>
       <Provider store={store}>
-        <Routes>
-          {/* <Route path="/login" element={<DemoLoginFormWithFormik />}></Route>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={true} />
+          <Routes>
+            {/* <Route path="/login" element={<DemoLoginFormWithFormik />}></Route>
         <Route path="/demo" element={<DemoChangeCar />}></Route>
         <Route path="/demo2" element={<DemoTinkerApp />}></Route> */}
-          <Route path="" element={<HomePageMaster />}>
-            <Route index element={<HomePage />}></Route>
-            {/* <Route path="login" element={<Login />}></Route> */}
-            <Route path="about" element={<About />}></Route>
-            <Route path="search" element={<Search />}></Route>
-            <Route path="detail">
-              <Route path=":prodID" element={<Detail />}></Route>
+            <Route path="" element={<HomePageMaster />}>
+              <Route index element={<HomePage />}></Route>
+              {/* <Route path="login" element={<Login />}></Route> */}
+              <Route path="about" element={<About />}></Route>
+              <Route path="search" element={<Search />}></Route>
+              <Route path="detail">
+                <Route path=":prodID" element={<Detail />}></Route>
+              </Route>
+
+              <Route path="antd" element={<AntDesignDemo />}></Route>
+              <Route path="antd-table" element={<TableDemo />}></Route>
+              <Route
+                path="antd-table-api"
+                element={<TableDemoWithApi />}
+              ></Route>
+              <Route path="*" element={<PageError />}></Route>
+              <Route
+                path="redux-change-number"
+                element={<ChangeNumber />}
+              ></Route>
+              <Route
+                path="redux-change-fontsize"
+                element={<ChangeFontSizeWithRedux />}
+              ></Route>
+              <Route path="redux-shoe-shop" element={<ShoeShop />}></Route>
+              <Route path="cart" element={<Cart />}></Route>
+
+              <Route path="register" element={<Register />}></Route>
+              <Route path="loginWithFormik" element={<Login2 />}></Route>
+              <Route path="/profile" element={<Profile2 />}></Route>
+              <Route path="/rq-shoe-shop" element={<ShoeShopRQ />}></Route>
+              <Route path="/rq-user" element={<UserManagement />}></Route>
             </Route>
 
-            <Route path="antd" element={<AntDesignDemo />}></Route>
-            <Route path="antd-table" element={<TableDemo />}></Route>
-            <Route path="antd-table-api" element={<TableDemoWithApi />}></Route>
-            <Route path="*" element={<PageError />}></Route>
-            <Route
-              path="redux-change-number"
-              element={<ChangeNumber />}
-            ></Route>
-            <Route
-              path="redux-change-fontsize"
-              element={<ChangeFontSizeWithRedux />}
-            ></Route>
-            <Route path="redux-shoe-shop" element={<ShoeShop />}></Route>
-            <Route path="cart" element={<Cart />}></Route>
-
-            <Route path="register" element={<Register />}></Route>
-            <Route path="loginWithFormik" element={<Login2 />}></Route>
-            <Route path="/profile" element={<Profile2 />}></Route>
-          </Route>
-
-          <Route path="user" element={<UserPageMaster />}>
-            <Route path="login" element={<Login />}></Route>
-            <Route path="about" element={<DanhSachSAnPham />}></Route>
-            <Route path="profile" element={<Profile />}></Route>
-            <Route path="forgotpass" element={<ForgotPass />}></Route>
-            {/* <Route path="*" element={<Navigate to="/user/login" />}></Route> */}
-          </Route>
-
-          <Route path="admin" element={<AdminPageMaster />}>
-            <Route path="login" element={<Login />}></Route>
-            <Route path="about" element={<About />}></Route>
-            <Route
-              path="product-management"
-              element={<ProductManagement />}
-            ></Route>
-            <Route path="add-product" element={<AddProduct />}></Route>
-            <Route path="edit">
-              <Route path=":id" element={<EditProdct />}></Route>
+            <Route path="user" element={<UserPageMaster />}>
+              <Route path="login" element={<Login />}></Route>
+              <Route path="about" element={<DanhSachSAnPham />}></Route>
+              <Route path="profile" element={<Profile />}></Route>
+              <Route path="forgotpass" element={<ForgotPass />}></Route>
+              {/* <Route path="*" element={<Navigate to="/user/login" />}></Route> */}
             </Route>
 
-            <Route path="product" element={<Product />}></Route>
-            <Route path="product">
-              <Route path=":id" element={<Product />}></Route>
+            <Route path="admin" element={<AdminPageMaster />}>
+              <Route path="login" element={<Login />}></Route>
+              <Route path="about" element={<About />}></Route>
+              <Route
+                path="product-management"
+                element={<ProductManagement />}
+              ></Route>
+              <Route path="add-product" element={<AddProduct />}></Route>
+              <Route path="edit">
+                <Route path=":id" element={<EditProdct />}></Route>
+              </Route>
+
+              <Route path="product" element={<Product />}></Route>
+              <Route path="product">
+                <Route path=":id" element={<Product />}></Route>
+              </Route>
             </Route>
-          </Route>
-        </Routes>
+          </Routes>
+        </QueryClientProvider>
       </Provider>
     </HistoryRouter>
   );
