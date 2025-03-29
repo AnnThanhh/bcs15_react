@@ -58,6 +58,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ShoeShopRQ from "./ReactQueryDemo/ShoeShopRQ";
 import UserManagement from "./ReactQueryDemo/UserRQ/UserManagement";
+import UseRefDemo from "./customHook/UseRefDemo";
+import UseMemoDemo from "./customHook/useMemo/UseMemoDemo";
+import UseCallBack from "./customHook/useCallback/UseCallBack";
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -119,6 +122,10 @@ const App = () => {
               <Route path="/profile" element={<Profile2 />}></Route>
               <Route path="/rq-shoe-shop" element={<ShoeShopRQ />}></Route>
               <Route path="/rq-user" element={<UserManagement />}></Route>
+
+              <Route path="/useref" element={<UseRefDemo />}></Route>
+              <Route path="/usememo" element={<UseMemoDemo />}></Route>
+              <Route path="/usecallback" element={<UseCallBack />}></Route>
             </Route>
 
             <Route path="user" element={<UserPageMaster />}>
